@@ -1,6 +1,6 @@
 {
   "name": "basic-parser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An extremely basic token-based parser",
   "repository": "https://github.com/amsul/basic-parser",
   "author": "Amsul <reach@amsul.ca>",
