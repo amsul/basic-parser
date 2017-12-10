@@ -3,6 +3,12 @@ import basicParser from './dist/basic-parser'
 
 const renderers = [
   {
+    match: { start: '\\{', end: '\\}' },
+    render({ children, data }) {
+      return data[children] || ''
+    },
+  },
+  {
     match: '_',
     render({ key, children }) {
       return <i key={key}>{children}</i>
@@ -34,6 +40,7 @@ export default class ExampleApp extends React.Component {
   render() {
     return (
       <div>
+        <p>{render({ text: 'Hi {firstName}!', data: { firstName: 'Sergey' } })}</p>
         <p>{render({ text: 'Hi there!' })}</p>
         <p>{render({ text: 'Hi *dude*' })}</p>
         <p>{render({ text: 'Hi _dude_' })}</p>

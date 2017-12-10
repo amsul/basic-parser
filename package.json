@@ -6,7 +6,8 @@
   "author": "Amsul <reach@amsul.ca>",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist/ && yarn build:native && yarn build:rollup",
+    "build": "rm -rf dist/ && yarn build:native && yarn build:rollup && yarn build:examples",
+    "build:examples": "cp -a dist/. examples/src/dist/",
     "build:native": "cp -a lib/. dist/ && mv dist/index.js dist/basic-parser.native.js",
     "build:rollup": "rollup -c",
     "develop": "watch 'yarn build' lib/.",
