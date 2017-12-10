@@ -2,8 +2,40 @@
   "name": "basic-parser",
   "version": "1.0.0",
   "description": "An extremely basic token-based parser",
-  "main": "index.js",
   "repository": "https://github.com/amsul/basic-parser",
   "author": "Amsul <reach@amsul.ca>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf dist/ && yarn build:native && yarn build:rollup",
+    "build:native": "cp -a lib/. dist/ && mv dist/index.js dist/basic-parser.native.js",
+    "build:rollup": "rollup -c",
+    "develop": "watch 'yarn build' lib/.",
+    "release": "yarn build && yarn publish"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "main": "dist/basic-parser.umd.js",
+  "module": "dist/basic-parser.js",
+  "jsnext:main": "dist/basic-parser.js",
+  "keywords": [],
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-jest": "^21.2.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.12.1",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "flow-bin": "^0.61.0",
+    "flow-typed": "^2.2.3",
+    "rollup": "^0.52.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-flow": "^1.1.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "watch": "^1.0.2"
+  }
 }
