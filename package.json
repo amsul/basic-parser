@@ -10,7 +10,7 @@
     "build:native": "cp -a lib/. dist/ && mv dist/index.js dist/basic-parser.native.js",
     "build:rollup": "rollup -c",
     "develop": "watch 'yarn build' lib/.",
-    "release": "yarn build && yarn publish"
+    "prepublish": "yarn build"
   },
   "files": [
     "dist/**"
