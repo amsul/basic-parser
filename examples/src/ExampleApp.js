@@ -58,6 +58,9 @@ export default class ExampleApp extends React.Component {
               'hi! [Hello *there* ~huh~ ??!?!?!](google.com) *dude* :) _*React*_',
           })}
         </p>
+        <p>{render({ text: 'this is *bold* and this \\*is not\\*' })}</p>
+        <p>{render({ text: 'this is _styled_ and this \\_is not\\_' })}</p>
+        <p>{render({ text: 'this has the escape character \\\\* as well' })}</p>
       </div>
     )
   }
