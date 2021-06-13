@@ -1,28 +1,20 @@
-import babel from 'rollup-plugin-babel'
-import flow from 'rollup-plugin-flow'
-import nodeResolve from 'rollup-plugin-node-resolve'
+import resolve from '@rollup/plugin-node-resolve'
+import typescript from '@rollup/plugin-typescript'
+
+import pkg from './package.json'
 
 export default {
-  input: 'lib/index.js',
+  input: 'lib/index.ts',
   output: [
     {
-      file: 'dist/basic-parser.js',
+      file: pkg.module,
       format: 'es',
-      exports: 'named',
     },
     {
-      file: 'dist/basic-parser.umd.js',
+      file: pkg.main,
       format: 'umd',
-      exports: 'named',
       name: 'basicParser',
     },
   ],
-  plugins: [
-    flow(),
-    babel({
-      exclude: 'node_modules/**',
-      presets: ['es2015-rollup', 'stage-0'],
-    }),
-    nodeResolve(),
-  ],
+  plugins: [resolve(), typescript()],
 }
