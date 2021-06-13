@@ -10,7 +10,7 @@
     "build:examples": "cp -a dist/. examples/src/dist/",
     "build:rollup": "yarn tsc lib/index.ts --declaration --emitDeclarationOnly --outDir dist/types && rollup -c -m && cp package.json dist/package.json",
     "develop": "watch 'yarn build' lib/.",
-    "format": "prettier --write 'lib/**/*.js'",
+    "format": "prettier --write 'lib/**/*.ts'",
     "prepublish": "yarn format && yarn build"
   },
   "files": [
