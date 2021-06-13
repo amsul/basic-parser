@@ -4,25 +4,25 @@ import basicParser from './dist/basic-parser'
 const renderers = [
   {
     match: { start: '\\{', end: '\\}' },
-    render({ children, data }) {
+    renderMatch({ children, data }) {
       return data[children] || ''
     },
   },
   {
     match: '_',
-    render({ key, children }) {
+    renderMatch({ key, children }) {
       return <i key={key}>{children}</i>
     },
   },
   {
     match: '\\*',
-    render({ key, children }) {
+    renderMatch({ key, children }) {
       return <b key={key}>{children}</b>
     },
   },
   {
     match: { start: '\\[', end: '\\](?:\\(([^\\)]+?)\\))?' },
-    render({ children, endMatches, key }) {
+    renderMatch({ children, endMatches, key }) {
       return (
         <a key={key} href={endMatches[0]}>
           {children}
@@ -32,35 +32,32 @@ const renderers = [
   },
   {
     match: '~',
-    render({ key, children }) {
+    renderMatch({ key, children }) {
       return <s key={key}>{children}</s>
     },
   },
 ]
 
-const render = basicParser({ renderers })
+const render = basicParser(renderers)
 
 export default class ExampleApp extends React.Component {
   render() {
     return (
       <div>
+        <p>{render('Hi {firstName}!', { firstName: 'Sergey' })}</p>
+        <p>{render('Hi there!')}</p>
+        <p>{render('Hi *dude*')}</p>
+        <p>{render('Hi _dude_')}</p>
+        <p>{render('Hi *_dude_*')}</p>
+        <p>{render('Hi _*dude*_')}</p>
         <p>
-          {render({ text: 'Hi {firstName}!', data: { firstName: 'Sergey' } })}
+          {render(
+            'hi! [Hello *there* ~huh~ ??!?!?!](google.com) *dude* :) _*React*_',
+          )}
         </p>
-        <p>{render({ text: 'Hi there!' })}</p>
-        <p>{render({ text: 'Hi *dude*' })}</p>
-        <p>{render({ text: 'Hi _dude_' })}</p>
-        <p>{render({ text: 'Hi *_dude_*' })}</p>
-        <p>{render({ text: 'Hi _*dude*_' })}</p>
-        <p>
-          {render({
-            text:
-              'hi! [Hello *there* ~huh~ ??!?!?!](google.com) *dude* :) _*React*_',
-          })}
-        </p>
-        <p>{render({ text: 'this is *bold* and this \\*is not\\*' })}</p>
-        <p>{render({ text: 'this is _styled_ and this \\_is not\\_' })}</p>
-        <p>{render({ text: 'this has the escape character \\\\* as well' })}</p>
+        <p>{render('this is *bold* and this \\*is not\\*')}</p>
+        <p>{render('this is _styled_ and this \\_is not\\_')}</p>
+        <p>{render('this has the escape character \\\\* as well')}</p>
       </div>
     )
   }
